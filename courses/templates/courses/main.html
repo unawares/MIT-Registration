@@ -1,0 +1,30 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+
+{% block body %}
+	<div class="courses container" style="padding-top: 100px; padding-bottom: 100px">
+        
+        <div class="grid" style="z-index: 10000;">
+                {% for course in courses %}
+            <div class="card" style="position: relative; padding-bottom: 30px">
+                <img class="card-img-top" src="{{ course.image.url }}" alt="Card image cap">
+                <div class="card-body dropdown">
+                    <h5 class="card-title">{{ course.speaker.name }}</h5>
+                    <p class="card-text">{{ course.description }}</p>
+                    <br />
+                    <p class="card-text">Speaker:</p>
+                    <p class="card-text teacher dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Merarsylan Meraliev</p>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <img src="{{ course.speaker.image.url }}" style="max-width: 100%" >
+                        <p>{{ course.speaker.surname }} {{ course.speaker.name }}</p>
+                        <p>Age: {{ course.speaker.age }}</p>
+                        <p>Degree: {{ course.speaker.degree }}</p>						</div>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'course-registration' pk=course.pk %}" class="btn btn-outline-danger" style="position: absolute; bottom: -15px">register</a>
+                        {% endif %}
+                    </div>
+            </div>
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}

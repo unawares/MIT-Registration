@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'dashboard',
+    'courses',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +121,37 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Authentication backend
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+# Google auth
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '140345774054-61gmhd26n09b2u5rhton9j1fcukmi40p.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'TOrTcxNOlLOn7JvKkti2Feyx'
+
+
+# Auth redirect urls
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = '/courses/'
+LOGOUT_REDIRECT_URL = '/courses/'
+
+
+# Auth settings
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+
+# Media
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
